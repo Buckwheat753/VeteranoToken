@@ -10,18 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0e14;--panel:#0f1420;--text:#e8ecf1;--muted:#9aa4b2;--border:#1a2233;--brand:#f5c84b;--brand2:#3aa675;
+      --bg:#0b0e14;--panel:#0f1420;--text:#e8ecf1;--muted:#9aa4b2;--border:#1a2233;--brand:#f5c84b;--accent:#3aa675;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
     a{color:#a7d6ff;text-decoration:none}
     .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
     /* Header */
     header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#0b0e14 0,#0b0e14f2 100%);border-bottom:1px solid var(--border)}
     .head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);object-fit:cover}
-    .brand h1{margin:0;font-size:20px;letter-spacing:.3px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+    .brand img{height:40px;width:40px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
+    .brand span{font-weight:800;letter-spacing:.3px}
     nav{display:flex;gap:14px;flex-wrap:wrap}
     nav a{color:var(--muted);font-weight:600}
     nav a:hover{color:#dbe5f3}
@@ -29,6 +30,7 @@
     .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:#131a29;color:#fff;font-weight:700}
     .btn.primary{background:var(--brand);color:#111;border-color:#caa743}
     .btn.ghost{background:transparent}
+
     /* Hero */
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:34px 0 24px}
     .hero h2{font-size:42px;line-height:1.1;margin:0 0 8px}
@@ -37,11 +39,11 @@
     .card{border:1px solid var(--border);background:var(--panel);border-radius:16px;padding:18px}
     .art{border:1px solid var(--border);background:linear-gradient(135deg,#10182a,#0f2030);border-radius:16px;min-height:220px;display:grid;place-items:center}
     .art img{width:160px;height:160px;border-radius:50%;border:1px solid var(--border);object-fit:cover;opacity:.95}
-    /* Grid */
+
+    /* Grid / sections */
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:32px 0}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .muted{color:var(--muted)}
-    /* Sections */
     section{padding:22px 0;border-top:1px solid var(--border)}
     h3{margin:0 0 10px}
     ul.clean{margin:0;padding-left:18px}
@@ -50,8 +52,10 @@
     .pie{width:180px;height:180px;margin:0 auto;position:relative}
     .pie svg{width:100%;height:100%}
     .pie .label{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;color:#fff}
+
     /* Footer */
     footer{border-top:1px solid var(--border);padding:18px 0;color:#a5b1c4}
+
     /* Responsive */
     @media (max-width:900px){
       .hero{grid-template-columns:1fr}
@@ -65,10 +69,10 @@
   <!-- Header -->
   <header>
     <div class="container head">
-      <div class="brand">
-        <img src="logo.png" alt="VTR logo" />
-        <h1>VeteranoToken <span class="badge">VTR</span></h1>
-      </div>
+      <a class="brand" href="#top">
+        <img src="logo.png" alt="VTR logo">
+        <span>VTR</span>
+      </a>
       <nav>
         <a href="#about">About</a>
         <a href="#tokenomics">Tokenomics</a>
@@ -85,10 +89,10 @@
 
   <!-- Hero -->
   <main class="container">
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="card">
-        <h2>Community-driven meme token</h2>
-        <p>Fair launch. <b>0% tax</b>. Transparent supply. Built on <b>BNB Smart Chain</b>.</p>
+        <h2>VTR — The Power of Community</h2>
+        <p>The veterans’ meme token. Fair launch. <b>0% tax</b>. LP locked.</p>
         <div class="cta">
           <a class="btn primary" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy on PancakeSwap</a>
           <a class="btn" target="_blank" rel="noopener" href="https://dexscreener.com/bsc/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Chart</a>
