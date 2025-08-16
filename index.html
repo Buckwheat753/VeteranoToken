@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0e14;--panel:#0f1420;--text:#e8ecf1;--muted:#9aa4b2;--border:#1a2233;--brand:#f5c84b;--accent:#3aa675;
+      --bg:#0b0e14;--panel:#0f1420;--text:#e8ecf1;--muted:#9aa4b2;--border:#1a2233;--brand:#f5c84b;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -30,6 +30,11 @@
     .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:#131a29;color:#fff;font-weight:700}
     .btn.primary{background:var(--brand);color:#111;border-color:#caa743}
     .btn.ghost{background:transparent}
+
+    /* Lang toggle */
+    .lang{border:1px solid var(--border);border-radius:12px;padding:2px;display:inline-flex;gap:2px}
+    .lang button{background:transparent;border:0;padding:6px 10px;border-radius:10px;font-weight:700;color:var(--muted);cursor:pointer}
+    .lang button.active{background:#111827;color:#fff}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:34px 0 24px}
@@ -74,15 +79,19 @@
         <span>VTR</span>
       </a>
       <nav>
-        <a href="#about">About</a>
-        <a href="#tokenomics">Tokenomics</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#buy">How to Buy</a>
-        <a href="#faq">FAQ</a>
+        <a id="navAbout" href="#about">About</a>
+        <a id="navTok" href="#tokenomics">Tokenomics</a>
+        <a id="navRoadmap" href="#roadmap">Roadmap</a>
+        <a id="navBuy" href="#buy">How to Buy</a>
+        <a id="navFAQ" href="#faq">FAQ</a>
       </nav>
       <div class="actions">
+        <span class="lang" id="langToggle">
+          <button data-lang="en" class="active">EN</button>
+          <button data-lang="ua">UA</button>
+        </span>
         <a class="btn ghost" target="_blank" rel="noopener" href="https://bscscan.com/token/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">BscScan</a>
-        <a class="btn primary" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy VTR</a>
+        <a class="btn primary" id="btnBuyTop" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy VTR</a>
       </div>
     </div>
   </header>
@@ -91,12 +100,12 @@
   <main class="container">
     <section class="hero" id="top">
       <div class="card">
-        <h2>VTR — The Power of Community</h2>
-        <p>The veterans’ meme token. Fair launch. <b>0% tax</b>. LP locked.</p>
+        <h2 id="heroTitle">VTR — The Power of Community</h2>
+        <p id="heroSub" class="muted">The veterans’ meme token. Fair launch. <b>0% tax</b>. LP locked.</p>
         <div class="cta">
-          <a class="btn primary" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy on PancakeSwap</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://dexscreener.com/bsc/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Chart</a>
-          <a class="btn" id="copyBtn">Copy contract</a>
+          <a class="btn primary" id="btnBuy1" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy on PancakeSwap</a>
+          <a class="btn" id="btnChart" target="_blank" rel="noopener" href="https://dexscreener.com/bsc/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Chart</a>
+          <a class="btn" id="btnCopy">Copy contract</a>
         </div>
         <p class="muted" style="margin-top:10px">Contract:
           <span class="mono" id="contract">0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0</span>
@@ -112,16 +121,16 @@
     <section>
       <div class="grid">
         <div class="card">
-          <h3>Fair Launch</h3>
-          <p class="muted">No presale. No hidden rules. Open and transparent token distribution.</p>
+          <h3 id="feat1">Fair Launch</h3>
+          <p class="muted" id="feat1t">No presale. No hidden rules. Open and transparent token distribution.</p>
         </div>
         <div class="card">
-          <h3>0% Tax</h3>
-          <p class="muted">No buy/sell fees. What you trade is what you get.</p>
+          <h3 id="feat2">0% Tax</h3>
+          <p class="muted" id="feat2t">No buy/sell fees. What you trade is what you get.</p>
         </div>
         <div class="card">
-          <h3>Community First</h3>
-          <p class="muted">Decisions are driven by the community and long-term growth.</p>
+          <h3 id="feat3">Community First</h3>
+          <p class="muted" id="feat3t">Decisions are driven by the community and long-term growth.</p>
         </div>
       </div>
     </section>
@@ -129,8 +138,8 @@
     <!-- About -->
     <section id="about">
       <div class="card">
-        <h3>About VTR</h3>
-        <p class="muted">VeteranoToken (VTR) is a community-driven meme token created to unite people around simple, transparent tokenomics and a shared mission. We keep things clean: fair launch, 0% tax, and a focus on building together.</p>
+        <h3 id="aboutTitle">About VTR</h3>
+        <p class="muted" id="aboutText">VeteranoToken (VTR) is a community-driven meme token created to unite people around simple, transparent tokenomics and a shared mission. We keep things clean: fair launch, 0% tax, and a focus on building together.</p>
       </div>
     </section>
 
@@ -138,8 +147,8 @@
     <section id="tokenomics">
       <div class="grid-2">
         <div class="card">
-          <h3>Tokenomics</h3>
-          <ul class="clean">
+          <h3 id="tokTitle">Tokenomics</h3>
+          <ul class="clean" id="tokList">
             <li><b>Total Supply:</b> 5,000,000,000 VTR</li>
             <li><b>Decimals:</b> 18</li>
             <li><b>Buy/Sell Tax:</b> 0% / 0%</li>
@@ -152,9 +161,9 @@
               <path d="M18 2 a 16 16 0 1 1 0 32 a 16 16 0 1 1 0 -32" fill="none" stroke="#21304a" stroke-width="4" />
               <path d="M18 2 a 16 16 0 1 1 0 32" fill="none" stroke="var(--brand)" stroke-width="4" stroke-dasharray="90 10" stroke-linecap="round" />
             </svg>
-            <div class="label">90% / 10%</div>
+            <div class="label" id="pieLabel">90% / 10%</div>
           </div>
-          <p class="muted" style="text-align:center;margin-top:8px">90% Liquidity · 10% Community & Airdrops</p>
+          <p class="muted" style="text-align:center;margin-top:8px" id="tokNote">90% Liquidity · 10% Community & Airdrops</p>
         </div>
       </div>
     </section>
@@ -163,8 +172,8 @@
     <section id="roadmap">
       <div class="grid-2">
         <div class="card">
-          <h3>Phase 1</h3>
-          <ul class="clean">
+          <h3 id="rm1">Phase 1</h3>
+          <ul class="clean" id="rm1t">
             <li>Token launch</li>
             <li>Initial Liquidity Pool</li>
             <li>Website v1</li>
@@ -172,8 +181,8 @@
           </ul>
         </div>
         <div class="card">
-          <h3>Phase 2</h3>
-          <ul class="clean">
+          <h3 id="rm2">Phase 2</h3>
+          <ul class="clean" id="rm2t">
             <li>Community growth & partnerships</li>
             <li>Marketing push</li>
             <li>LP lock announcement</li>
@@ -186,15 +195,15 @@
     <!-- How to buy -->
     <section id="buy">
       <div class="card">
-        <h3>How to Buy</h3>
-        <ol class="clean">
+        <h3 id="buyTitle">How to Buy</h3>
+        <ol class="clean" id="buySteps">
           <li>Install MetaMask and switch to <b>BNB Smart Chain</b>.</li>
           <li>Add the VTR contract: <span class="mono">0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0</span>.</li>
           <li>Open PancakeSwap and swap BNB → VTR.</li>
         </ol>
         <div class="cta" style="margin-top:10px">
-          <a class="btn primary" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy on PancakeSwap</a>
-          <a class="btn" target="_blank" rel="noopener" href="https://bscscan.com/token/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">View on BscScan</a>
+          <a class="btn primary" id="btnBuy2" target="_blank" rel="noopener" href="https://pancakeswap.finance/swap?outputCurrency=0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Buy on PancakeSwap</a>
+          <a class="btn" id="btnBsc" target="_blank" rel="noopener" href="https://bscscan.com/token/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">View on BscScan</a>
         </div>
       </div>
     </section>
@@ -202,9 +211,9 @@
     <!-- FAQ -->
     <section id="faq">
       <div class="grid">
-        <div class="card"><h3>Where to buy?</h3><p class="muted">On PancakeSwap using the official contract above.</p></div>
-        <div class="card"><h3>Any taxes?</h3><p class="muted">No. 0% buy / 0% sell.</p></div>
-        <div class="card"><h3>Is LP locked?</h3><p class="muted">Planned. We’ll publish the lock link once done.</p></div>
+        <div class="card"><h3 id="f1">Where to buy?</h3><p class="muted" id="f1t">On PancakeSwap using the official contract above.</p></div>
+        <div class="card"><h3 id="f2">Any taxes?</h3><p class="muted" id="f2t">No. 0% buy / 0% sell.</p></div>
+        <div class="card"><h3 id="f3">Is LP locked?</h3><p class="muted" id="f3t">Planned. We’ll publish the lock link once done.</p></div>
       </div>
     </section>
   </main>
@@ -212,20 +221,87 @@
   <footer>
     <div class="container">
       © <span id="year"></span> VTR · All rights reserved ·
-      <a target="_blank" rel="noopener" href="https://dexscreener.com/bsc/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0">Chart</a>
+      <a target="_blank" rel="noopener" href="https://dexscreener.com/bsc/0x0A65e4052C3292e9F4db5aDA012D09B84d1c65f0" id="footChart">Chart</a>
     </div>
   </footer>
 
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-    const copyBtn = document.getElementById('copyBtn');
-    copyBtn?.addEventListener('click', async () => {
+
+    // Copy contract
+    document.getElementById('btnCopy')?.addEventListener('click', async () => {
       try{
         await navigator.clipboard.writeText(document.getElementById('contract').textContent.trim());
-        document.getElementById('copied').textContent = 'Copied!';
-        setTimeout(()=>document.getElementById('copied').textContent='',1200);
+        const c = document.getElementById('copied');
+        c.textContent = 'Copied!';
+        setTimeout(()=>c.textContent='',1200);
       }catch(e){}
     });
+
+    // i18n
+    const T = {
+      en: {
+        navAbout:"About", navTok:"Tokenomics", navRoadmap:"Roadmap", navBuy:"How to Buy", navFAQ:"FAQ",
+        heroTitle:"VTR — The Power of Community",
+        heroSub:"The veterans’ meme token. Fair launch. <b>0% tax</b>. LP locked.",
+        btnBuyTop:"Buy VTR", btnBuy1:"Buy on PancakeSwap", btnBuy2:"Buy on PancakeSwap",
+        btnChart:"Chart", btnBsc:"View on BscScan", btnCopy:"Copy contract",
+        feat1:"Fair Launch", feat1t:"No presale. No hidden rules. Open and transparent token distribution.",
+        feat2:"0% Tax", feat2t:"No buy/sell fees. What you trade is what you get.",
+        feat3:"Community First", feat3t:"Decisions are driven by the community and long-term growth.",
+        aboutTitle:"About VTR",
+        aboutText:"VeteranoToken (VTR) is a community-driven meme token created to unite people around simple, transparent tokenomics and a shared mission. We keep things clean: fair launch, 0% tax, and a focus on building together.",
+        tokTitle:"Tokenomics", pieLabel:"90% / 10%", tokNote:"90% Liquidity · 10% Community & Airdrops",
+        rm1:"Phase 1", rm2:"Phase 2",
+        buyTitle:"How to Buy",
+        f1:"Where to buy?", f1t:"On PancakeSwap using the official contract above.",
+        f2:"Any taxes?", f2t:"No. 0% buy / 0% sell.",
+        f3:"Is LP locked?", f3t:"Planned. We’ll publish the lock link once done."
+      },
+      ua: {
+        navAbout:"Про проєкт", navTok:"Токеноміка", navRoadmap:"Дорожня карта", navBuy:"Як купити", navFAQ:"FAQ",
+        heroTitle:"VTR — Сила спільноти",
+        heroSub:"Ветеранський мем-токен. Чесний запуск. <b>0% податків</b>. LP буде зафіксовано.",
+        btnBuyTop:"Купити VTR", btnBuy1:"Купити на PancakeSwap", btnBuy2:"Купити на PancakeSwap",
+        btnChart:"Графік", btnBsc:"Переглянути в BscScan", btnCopy:"Скопіювати контракт",
+        feat1:"Чесний запуск", feat1t:"Без пресейлу і прихованих правил. Прозорий розподіл токенів.",
+        feat2:"0% податків", feat2t:"Жодних комісій на купівлю/продаж.",
+        feat3:"Спільнота — перша", feat3t:"Рішення приймаємо разом і на довгу дистанцію.",
+        aboutTitle:"Про VTR",
+        aboutText:"VeteranoToken (VTR) — спільнотний мем-токен із прозорою токеномікою та простою місією. Чесний запуск, 0% податків і фокус на зростанні спільноти.",
+        tokTitle:"Токеноміка", pieLabel:"90% / 10%", tokNote:"90% Ліквідність · 10% Спільнота та airdrop",
+        rm1:"Фаза 1", rm2:"Фаза 2",
+        buyTitle:"Як купити",
+        f1:"Де купити?", f1t:"На PancakeSwap, використовуючи офіційний контракт вище.",
+        f2:"Є податки?", f2t:"Ні. 0% на купівлю та продаж.",
+        f3:"LP зафіксовано?", f3t:"Заплановано. Після блокування додамо посилання."
+      }
+    };
+
+    const mapIDs = ["navAbout","navTok","navRoadmap","navBuy","navFAQ",
+      "heroTitle","heroSub","btnBuyTop","btnBuy1","btnBuy2","btnChart","btnBsc","btnCopy",
+      "feat1","feat1t","feat2","feat2t","feat3","feat3t",
+      "aboutTitle","aboutText","tokTitle","pieLabel","tokNote",
+      "rm1","rm2","buyTitle","f1","f1t","f2","f2t","f3","f3t","footChart"];
+
+    function setLang(lang){
+      const d = T[lang] || T.en;
+      mapIDs.forEach(id=>{
+        const el = document.getElementById(id);
+        if(!el || d[id]===undefined) return;
+        el.innerHTML = d[id];
+      });
+      document.querySelectorAll('#langToggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+      localStorage.setItem('lang', lang);
+    }
+
+    document.getElementById('langToggle')?.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button[data-lang]');
+      if(btn) setLang(btn.dataset.lang);
+    });
+
+    setLang(localStorage.getItem('lang') || 'en');
   </script>
 </body>
 </html>
